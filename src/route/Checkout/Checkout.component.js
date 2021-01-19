@@ -9,40 +9,17 @@
  * @link https://github.com/scandipwa/base-theme
  */
 import ContentWrapper from 'Component/ContentWrapper';
+import StepIndicator from 'Route/Checkout/StepIndicator';
 import { Checkout as SourceCheckout } from 'SourceRoute/Checkout/Checkout.component';
 
 import './Checkout.steps.scss';
 
-export const STEP_INDEXES = {
-    SHIPPING_STEP: [0, 'Shipping'],
-    BILLING_STEP: [1, 'Review & Payment'],
-    DETAILS_STEP: [2, 'Finish']
-};
-
 /** @namespace ScandipwaTest/Route/Checkout/Component/CheckoutComponent */
 export class CheckoutComponent extends SourceCheckout {
-    renderStepIndicators() {
-        const { checkoutStep } = this.props;
-        return (
-            <div block="CheckoutSteps">
-                <div>
-                    { Object.keys(STEP_INDEXES).map((key, index) => {
-                        const isActive = STEP_INDEXES[checkoutStep][0] >= index;
-                        return (
-                            <div className={ isActive ? 'active' : '' }>
-                                <span data-text={ STEP_INDEXES[key][1] }>{ index + 1 }</span>
-                            </div>
-                        );
-                    }) }
-                </div>
-            </div>
-        );
-    }
-
     render() {
         return (
             <main block="Checkout">
-                { this.renderStepIndicators() }
+                <StepIndicator step={ this.props.checkoutStep } />
                 <ContentWrapper
                   wrapperMix={ { block: 'Checkout', elem: 'Wrapper' } }
                   label={ __('Checkout page') }

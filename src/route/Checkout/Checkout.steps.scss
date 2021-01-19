@@ -29,11 +29,13 @@
         content: "";
         display: inline-block;
         position: absolute;
-        right: 50%;
+        right: 300%;
         width: 10000px;
         height: 3px;
         margin-top: 12px;
         z-index: 1;
+        transition: all 300ms ease-in-out;
+        opacity: 0;
       }
 
       > span {
@@ -47,6 +49,7 @@
         border: 3px solid var(--breadcrumbs-background);
         position: relative;
         z-index: 2;
+        transition: all 500ms ease-in-out;
 
         &:after {
           content: attr(data-text);
@@ -63,11 +66,14 @@
       &.active {
         &:before {
           background: #a82221;
+          right: 50%;
+          opacity: 1;
         }
 
         > span {
           background: #a82221;
           color: white;
+          animation: Active 500ms;
 
           &:after {
             color: black;
@@ -75,5 +81,17 @@
         }
       }
     }
+  }
+}
+
+@keyframes Active {
+  0% {
+    transform: scale(0);
+  }
+  8% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
   }
 }
